@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Unit
+public class Player : Unit // INHERITANCE
 {
     bool crossing = false;
     private float player_zRange = 98.0f;
@@ -51,7 +51,7 @@ public class Player : Unit
         }
     }
 
-    public override bool AvoidOverRange()
+    public override bool AvoidOverRange() // POLYMORPHISM
     {
         if (transform.position.z < -player_zRange)
         {

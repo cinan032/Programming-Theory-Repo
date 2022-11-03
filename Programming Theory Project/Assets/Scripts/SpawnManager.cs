@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
         InvokeRepeating("SpawnCar", 0, Random.Range(1, maxRandomDelay));        
     }
 
-    void SpawnCar()
+    void SpawnCar() 
     {
         if (gameManager.IsWin || gameManager.IsGameover) return;
 

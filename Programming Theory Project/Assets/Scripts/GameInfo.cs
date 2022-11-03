@@ -22,8 +22,8 @@ public class GameInfo : MonoBehaviour
 
 
     [Serializable]
-    public class Record
-    {
+    public class Record // ABSTRACTION
+    { 
         public string lastWinner;
     }
 

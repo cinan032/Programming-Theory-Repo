@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit : MonoBehaviour // INHERITANCE
 {
     public GameObject gameManager;
     private float speed = 40.0f;
@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour
         gameManager = GameObject.Find("GameManager");
     }
        
-    public float Speed { get { return speed; } set { speed = value; } }
+    public float Speed { get { return speed; } set { speed = value; } } // ENCAPSULATION
 
     public void GoForward(float input)
     {
@@ -22,12 +22,12 @@ public class Unit : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * speed * input);
     }
 
-    public virtual void TurnLeftRight(float input)
+    public virtual void TurnLeftRight(float input) // POLYMORPHISM
     {
         if (gameManager.GetComponent<GameManager>().IsWin || gameManager.GetComponent<GameManager>().IsGameover) return;
         transform.Translate(Vector3.right * Time.deltaTime * speed * input);
     }
-    public virtual bool AvoidOverRange()
+    public virtual bool AvoidOverRange() // POLYMORPHISM
     {
         if (transform.position.z < -zRange)
         {

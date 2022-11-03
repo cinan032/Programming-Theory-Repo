@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Car : Unit
+public class Car : Unit // INHERITANCE
 {
     void Update()
     {
@@ -14,7 +14,7 @@ public class Car : Unit
         }
     }
 
-    public override void TurnLeftRight(float input)
+    public override void TurnLeftRight(float input) // POLYMORPHISM
     {
         return;
     }

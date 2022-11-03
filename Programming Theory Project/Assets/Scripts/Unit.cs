@@ -5,7 +5,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public GameObject gameManager;
-    private float speed = 30.0f;
+    private float speed = 40.0f;
     private float zRange = 120.0f;
     private float xRange = 40.0f;
 

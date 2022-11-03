@@ -7,26 +7,41 @@ public class Player : Unit
 {
     bool crossing = false;
     private float player_zRange = 98.0f;
+    Animator animator;
+    public ParticleSystem particle;
 
+    bool gameStart = false;
 
     void Start()
     {
-        this.Speed = 20.0f;        
+        this.Speed = 20.0f;
+        animator = GetComponent<Animator>();
     }
-
 
     void Update()
     {
-        if(AvoidOverRange()) crossing = false;
+        if (!gameStart)
+        {
+            if (transform.position.x < -35) transform.Translate(Vector3.forward * Time.deltaTime * (this.Speed/2));
+            else gameStart = true;
+            return;
+        }
+        //animator.SetFloat("Speed_f", 0f);
+        if (AvoidOverRange()) crossing = false;
         if (!crossing)
         {
-            TurnLeftRight(Input.GetAxis("Horizontal"));
+            float hor = Input.GetAxis("Horizontal");
+            if (hor != 0) animator.SetFloat("Speed_f", 1.0f);
+            else animator.SetFloat("Speed_f", 0.0f);
+            TurnLeftRight(hor);
+           
         }
 
         if (Input.GetKeyDown(KeyCode.Space) || crossing)
         {
             crossing = true;
-            GoForward(1);            
+            GoForward(1);
+            animator.SetFloat("Speed_f", 3.0f);
             //GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
             //if (pooledProjectile != null)
             //{
@@ -57,6 +72,9 @@ public class Player : Unit
     {
         if (collision.gameObject.CompareTag("Car"))
         {
+            crossing = false;
+            animator.SetFloat("Speed_f", 0.0f);
+            particle.Play();
             GameOver();    
         }
     }

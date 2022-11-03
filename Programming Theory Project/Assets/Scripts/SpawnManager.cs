@@ -5,8 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] cars;
-    public int spawnAmount = 1;
-    public int maxRandomDelay = 5;
+    public int maxRandomDelay = 3;
 
     float[] posX = { 24.0f, 14.0f, 4.0f, -5.0f, -15.0f, -25.0f };
     float posZ = -120.0f;

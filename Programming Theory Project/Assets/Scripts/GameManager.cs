@@ -11,15 +11,16 @@ public class GameManager : MonoBehaviour
     public bool IsWin { get { return win; } }
     public bool IsGameover { get { return gameover; } set { gameover = value; } }
 
-    public Text Msg;
+    public Text msg;
+    public Text lastWinner;
 
     GameObject player;
-
 
     private void Start()
     {
         player = GameObject.Find("Player");
-
+        if (GameInfo.instance != null)
+            lastWinner.text = "Last Winner: " + GameInfo.instance.lastRecord.lastWinner;
     }
 
     void Update()
@@ -29,8 +30,15 @@ public class GameManager : MonoBehaviour
             win = true;
             Debug.Log("Win!");
         }
-        if (win) Msg.text = "Win!\nPress Space to restart.";
-        if (gameover) Msg.text = "Game Over!\nPress Space to restart.";
-        if ((win || gameover) && Input.GetKeyDown(KeyCode.Space)) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (win)
+        {
+            msg.text = "Win!\nPress Space to exit.";
+            GameInfo.instance.saveRecord();
+        }
+        if (gameover) msg.text = "Game Over!\nPress Space to restart.";
+
+
+        if (win && Input.GetKeyDown(KeyCode.Space)) SceneManager.LoadScene(0);
+        if (gameover && Input.GetKeyDown(KeyCode.Space)) SceneManager.LoadScene(1);
     }
 }
